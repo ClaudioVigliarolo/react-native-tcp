@@ -42,7 +42,7 @@ function TcpSocket(options: ?{ id: ?number }) {
     }
   } else {
     // javascript generated sockets range from 1-1000
-    this._id = 3;
+    this._id = instances++;
   }
 
   this._eventEmitter = new NativeEventEmitter(Sockets);
@@ -247,9 +247,8 @@ TcpSocket.prototype.destroy = function () {
     this._destroyed = true;
     this._debug("destroying");
     this._clearTimeout();
-    Sockets.destroy(3);
-    this._debug("destroying and disconnecting");
-    setDisconnected(this, false);
+
+    Sockets.destroy(this._id);
   }
 };
 
