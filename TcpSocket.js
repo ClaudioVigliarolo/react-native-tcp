@@ -42,7 +42,7 @@ function TcpSocket(options: ?{ id: ?number }) {
     }
   } else {
     // javascript generated sockets range from 1-1000
-    this._id = instances++;
+    this._id = 3;
   }
 
   this._eventEmitter = new NativeEventEmitter(Sockets);
@@ -212,9 +212,9 @@ TcpSocket.prototype.setTimeout = function (
 };
 
 TcpSocket.prototype.address = function (): {
-  port: number;
-  address: string;
-  family: string;
+  port: number,
+  address: string,
+  family: string,
 } {
   return this._address;
 };
@@ -298,9 +298,9 @@ TcpSocket.prototype._unregisterEvents = function (): void {
 };
 
 TcpSocket.prototype._onConnect = function (address: {
-  port: number;
-  address: string;
-  family: string;
+  port: number,
+  address: string,
+  family: string,
 }): void {
   this._debug("received", "connect");
 
@@ -311,8 +311,8 @@ TcpSocket.prototype._onConnect = function (address: {
 };
 
 TcpSocket.prototype._onConnection = function (info: {
-  id: number;
-  address: { port: number; address: string; family: string };
+  id: number,
+  address: { port: number, address: string, family: string },
 }): void {
   this._debug("received", "connection");
 
@@ -373,7 +373,7 @@ TcpSocket.prototype.write = function (chunk, encoding, cb) {
 TcpSocket.prototype._write = function (
   buffer: any,
   encoding: ?String,
-  callback: ?((err: ?Error) => void)
+  callback: ?(err: ?Error) => void
 ): boolean {
   var self = this;
 
@@ -415,7 +415,7 @@ TcpSocket.prototype._write = function (
 
 function setConnected(
   socket: TcpSocket,
-  address: { port: number; address: string; family: string }
+  address: { port: number, address: string, family: string }
 ) {
   socket.writable = socket.readable = true;
   socket._state = STATE.CONNECTED;
