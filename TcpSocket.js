@@ -247,7 +247,7 @@ TcpSocket.prototype.destroy = function () {
     this._destroyed = true;
     this._debug("destroying");
     this._clearTimeout();
-    Sockets.destroy(this._id);
+    Sockets.destroy(3);
     this._debug("destroying and disconnecting");
     setDisconnected(this, false);
   }
